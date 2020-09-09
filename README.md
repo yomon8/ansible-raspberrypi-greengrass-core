@@ -36,5 +36,6 @@ run launcher script.
 
 ```sh
 /bin/bash install.sh
+SSH password: <input pi user password>
 ```
 
