@@ -1,0 +1,10 @@
+---
+- name: install pip3.7
+  become: true
+  shell: >
+    curl -kL https://bootstrap.pypa.io/get-pip.py | python3.7
+
+- name: install greengrasssdk
+  become: true
+  shell: >
+    pip3.7 install greengrasssdk

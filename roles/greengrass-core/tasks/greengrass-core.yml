@@ -1,0 +1,68 @@
+---
+- name: prepare workdir
+  file:
+    path: "{{work_dir}}"
+    state: directory
+
+- name: remove old setting file 
+  file:
+    path: "{{work_dir}}/GreengrassDeviceSetup.config.info"
+    state: absent
+
+- name: download setup script
+  get_url:
+    url: https://d1onfpft10uf5o.cloudfront.net/greengrass-device-setup/downloads/gg-device-setup-latest.sh
+    dest: "{{work_dir}}/gg-device-setup-latest.sh"
+    mode: u=rwx
+
+- name: pre-setup GG-core setup script
+  become: true
+  shell: >
+    {{work_dir}}/gg-device-setup-latest.sh bootstrap-greengrass \
+    --aws-access-key-id {{aws_access_key}} \
+    --aws-secret-access-key {{aws_secret_access_key}} \
+    --aws-session-token {{aws_session_token}} \
+    --region {{aws_region}} \
+    --group-name {{gg_group_name}} \
+    --core-name {{gg_core_name}} \
+    --ggc-root-path / --log-path ./ --deployment-timeout 300
+  args:
+    chdir: "{{work_dir}}"
+
+- name: reboot
+  become: true
+  reboot:
+    msg: reboot by ansible
+    reboot_timeout: 600
+    post_reboot_delay: 15
+
+- name: setup GG-core setup script
+  become: true
+  shell: >
+    echo "yes" | {{work_dir}}/gg-device-setup-latest.sh bootstrap-greengrass \
+    --aws-access-key-id {{aws_access_key}} \
+    --aws-secret-access-key {{aws_secret_access_key}} \
+    --aws-session-token {{aws_session_token}} && test -e /greengrass/ggc/core/greengrassd
+  args:
+    chdir: "{{work_dir}}"
+
+- name: copy systemd service unit
+  become: true
+  copy:
+    src: greengrassd.service
+    dest: /etc/systemd/system/greengrassd.service
+  
+- name: start greengrass service
+  become: true
+  service:
+    name: greengrassd
+    enabled: yes
+    state: started
+
+- name: wait for a success in the daemon log
+  become: true
+  wait_for:
+    path: /greengrass/ggc/var/log/system/runtime.log
+    search_regex: "Deployment agent connected to cloud"
+    delay: 10
+    timeout: 60

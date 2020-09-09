@@ -1,0 +1,12 @@
+{
+    "name": "Existing Dockerfile",
+    "context": "..",
+    "dockerFile": "Dockerfile",
+    "settings": {
+        "terminal.integrated.shell.linux": null
+    },
+    "extensions": [
+        "vscoss.vscode-ansible",
+        "haaaad.ansible"
+    ]
+}
