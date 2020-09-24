@@ -1,7 +1,14 @@
 #!/bin/bash
 set -eu 
 
-RPI_IP=${RPI_IP}
+regex_ip="^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+
+printf "Raspberry Pi IP: "
+read RPI_IP
+if [[ ! ${RPI_IP} =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]];then 
+echo "Invalid IP !"
+fi
+
 GG_GROUP_NAME=${GG_GROUP_NAME}
 GG_CORE_NAME=${GG_CORE_NAME}
 AWS_REGION=${AWS_REGION}
