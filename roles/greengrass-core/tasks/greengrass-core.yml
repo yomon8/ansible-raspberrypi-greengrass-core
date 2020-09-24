@@ -58,11 +58,3 @@
     name: greengrassd
     enabled: yes
     state: started
-
-- name: wait for a success in the daemon log
-  become: true
-  wait_for:
-    path: /greengrass/ggc/var/log/system/runtime.log
-    search_regex: "Deployment agent connected to cloud"
-    delay: 10
-    timeout: 60
