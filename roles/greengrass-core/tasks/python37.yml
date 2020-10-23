@@ -8,3 +8,8 @@
   become: true
   shell: >
     pip3.7 install greengrasssdk
+
+- name: install AWSIoTPythonSDK
+  become: true
+  shell: > 
+    pip3.7 install AWSIoTPythonSDK
