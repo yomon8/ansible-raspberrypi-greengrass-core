@@ -2,6 +2,7 @@
     "name": "Existing Dockerfile",
     "context": "..",
     "dockerFile": "Dockerfile",
+    "remoteUser": "dev",
     "settings": {
         "terminal.integrated.shell.linux": null
     },
