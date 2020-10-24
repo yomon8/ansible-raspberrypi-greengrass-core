@@ -51,8 +51,11 @@ Raspberry Pi IP: <input ip address of your Raspberry Pi>
 SSH password: <input pi user password>
 ```
 
+### SSH Configuration
 
-## Option
+If you want to change the SSH configuration, use `./ssh_config` .
+
+### Option
 Start Greengrass Core group deployment with aws cli.
 
 ```sh
