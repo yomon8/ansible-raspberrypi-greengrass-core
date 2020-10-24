@@ -29,9 +29,9 @@ aws sts get-session-token --query 'Credentials | {A:AccessKeyId,B:SecretAccessKe
 set required environment variables.
 
 ```sh
-export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
-export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-export AWS_SESSION_TOKEN=AQoDYXdzEJr1K...o5OytwEXAMPLE=
+export AWS_ACCESS_KEY_ID=AKIA.......
+export AWS_SECRET_ACCESS_KEY=wJalrXUtnF.......
+export AWS_SESSION_TOKEN=AQoDYXdzEJr1K.......
 export AWS_REGION=ap-northeast-1
 
 # only required by setup tool installation
