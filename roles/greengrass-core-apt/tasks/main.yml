@@ -1,7 +1,3 @@
 ---
-- name: populate service facts
-  service_facts:
-
 - include_tasks: os.yml
 - include_tasks: greengrass-core-apt.yml
-  when: ansible_facts.services['greengrassd.service'] is not defined
