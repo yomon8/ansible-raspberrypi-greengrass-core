@@ -1,0 +1,43 @@
+---
+- name: add ggc user
+  become: true
+  user:
+    name: ggc_user
+
+- name: add ggc group
+  become: true
+  group:
+    name: ggc_group
+
+- name: enable container features
+  become: true
+  replace:
+    path: /boot/cmdline.txt
+    regexp: '^([\w](?!.*\b{{ item }}\b).*)$'
+    replace: '\1 {{ item }}'
+  with_items:
+  - "cgroup_memory=1"
+  - "cgroup_enable=memory"
+
+- name: set sysctl fs.protected_hardlinks
+  become: true
+  sysctl:
+    name: fs.protected_hardlinks
+    value: '1'
+    state: present
+    sysctl_file: /etc/98-rpi.conf
+
+- name: set sysctl fs.protected_symlinks
+  become: true
+  sysctl:
+    name: fs.protected_symlinks
+    value: '1'
+    state: present
+    sysctl_file: /etc/98-rpi.conf
+
+- name: reboot
+  become: true
+  reboot:
+    msg: reboot by ansible
+    reboot_timeout: 600
+    post_reboot_delay: 15

@@ -1,0 +1,8 @@
+---
+- hosts: all
+  gather_facts: no
+  roles: 
+    - role: greengrass-core-apt
+    - role: python
+  vars:
+    ansible_user: pi
