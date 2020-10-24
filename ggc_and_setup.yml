@@ -2,6 +2,7 @@
 - hosts: all
   gather_facts: no
   roles: 
-    - role: greengrass-core
+    - role: greengrass-core-setup
+    - role: python
   vars:
     ansible_user: pi
