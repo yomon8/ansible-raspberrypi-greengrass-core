@@ -32,3 +32,10 @@
   apt:
     update_cache: yes
     name: aws-iot-greengrass-core
+
+- name: download Amazon root CA pem
+  become: true
+  get_url:
+    url: https://www.amazontrust.com/repository/AmazonRootCA1.pem
+    dest: "/greengrass/certs/root.ca.pem"
+    mode: u=r
