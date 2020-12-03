@@ -4,10 +4,6 @@ SCRIPT_DIR=$(cd $(dirname $0); pwd)
 cd ${SCRIPT_DIR}
 
 WORK_DIR=/home/pi/work
-AWS_REGION=${AWS_REGION}
-AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
 
 # Select installation type 
 menu=$(ls -1 ./ggc_*.yml)
@@ -23,13 +19,20 @@ do
     if [ "${playbook}" = "./ggc_apt.yml" ]; then
         GG_GROUP_NAME="DUMMY"
         GG_CORE_NAME="DUMMY"
+        AWS_REGION="DUMMY"
+        AWS_ACCESS_KEY_ID="DUMMY"
+        AWS_SECRET_ACCESS_KEY="DUMMY"
+        AWS_SESSION_TOKEN="DUMMY"
     fi
     break
   else
     echo "invalid selection."
   fi
 done
-
+AWS_REGION=${AWS_REGION}
+AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
 GG_GROUP_NAME=${GG_GROUP_NAME}
 GG_CORE_NAME=${GG_CORE_NAME}
 
