@@ -1,5 +1,5 @@
 # ansible-raspberrypi-greengrass-core
-AWS Greengrass Core Setup for Raspberry Pi
+AWS Greengrass Core (V1 Classic) Setup for Raspberry Pi
 
 # Prerequisites
 
